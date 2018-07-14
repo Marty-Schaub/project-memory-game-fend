@@ -67,6 +67,9 @@ function clicks(event){
 
 // this calls the function to show the cards
   openList();
+  // if (myClicks ===2){
+  //   checkForMatch();
+  // };
 };
 
 function openList(){
@@ -88,12 +91,9 @@ function openList(){
     class2.add("open", "show");
     secondCard = myCard.innerHTML;
     console.log(secondCard);
-    myClicks=0;
+ setTimeout(checkForMatch,250) ;
   };
 
-  if (firstCard === secondCard) {
-    match();
-  };
 };
 
 
@@ -102,4 +102,24 @@ function match(){
   class1.add("match");
   class2.add("match");
 
+};
+
+function noMatch(){
+
+  class1.remove("open","show");
+  class2.remove("open","show");
+};
+
+
+function checkForMatch(){
+  if (firstCard === secondCard) {
+    match();
+    myClicks=0;
+  };
+
+  if (firstCard != secondCard && myClicks===2) {
+    alert ("The cards do not match.");
+    noMatch();
+    myClicks=0;
+  };
 };
