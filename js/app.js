@@ -26,6 +26,7 @@ function shuffle(array) {
 }
 
 
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -36,3 +37,51 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+// This sets up the event listeners
+const newDeck = document.getElementsByClassName("card");
+for (let i=0; i < newDeck.length; i++){
+  // This calls the clicks function that does some work
+  newDeck[i].addEventListener ("click", clicks);
+
+};
+
+// these 3 let statements are used to keep track of how many cards are clicked
+let firstCard = "";
+
+let secondCard = "";
+
+let myClicks = 0;
+
+/*This is the main function and really drives what happens when a card is clicked
+it branches out to other functions to achieve the overall effect of picking cards
+and matching.
+*/
+function clicks(event){
+myClicks ++;
+
+
+if (myClicks ===1) {
+  firstCard =this.innerHTML;
+  console.log (firstCard);
+};
+
+if (myClicks ===2) {
+  secondCard = this.innerHTML;
+  console.log(secondCard);
+};
+// this calls the function to show the cards
+showMe();
+console.log(myClicks);
+};
+
+// this will be the part that makes the cards show
+function showMe(){
+
+
+// need to update this to add the matched class to the cards if they match
+if (firstCard === secondCard) {
+  console.log ("GREAT");
+
+};
+};
