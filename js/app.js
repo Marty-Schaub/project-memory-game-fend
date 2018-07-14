@@ -48,40 +48,58 @@ for (let i=0; i < newDeck.length; i++){
 
 // these 3 let statements are used to keep track of how many cards are clicked
 let firstCard = "";
-
 let secondCard = "";
-
+// let classes = "";
 let myClicks = 0;
+let myCard = "";
+let class1="";
+let class2="";
 
 /*This is the main function and really drives what happens when a card is clicked
 it branches out to other functions to achieve the overall effect of picking cards
 and matching.
 */
+
 function clicks(event){
-myClicks ++;
 
+  myCard = this;
+  myClicks ++;
 
-if (myClicks ===1) {
-  firstCard =this.innerHTML;
-  console.log (firstCard);
-};
-
-if (myClicks ===2) {
-  secondCard = this.innerHTML;
-  console.log(secondCard);
-};
 // this calls the function to show the cards
-showMe();
-console.log(myClicks);
+  openList();
 };
 
-// this will be the part that makes the cards show
-function showMe(){
+function openList(){
+// need to add functionality to check and make sure the cards clicked are not the
+// exact same card meaning they literally clicked on same card
 
+  if (myClicks ===1) {
 
-// need to update this to add the matched class to the cards if they match
-if (firstCard === secondCard) {
-  console.log ("GREAT");
+    class1=myCard.classList;
+    class1.add("open", "show");
+    firstCard =myCard.innerHTML;
 
+    console.log (firstCard);
+  };
+
+  if (myClicks ===2) {
+
+    class2=myCard.classList;
+    class2.add("open", "show");
+    secondCard = myCard.innerHTML;
+    console.log(secondCard);
+    myClicks=0;
+  };
+
+  if (firstCard === secondCard) {
+    match();
+  };
 };
+
+
+function match(){
+
+  class1.add("match");
+  class2.add("match");
+
 };
