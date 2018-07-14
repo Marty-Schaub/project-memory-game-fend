@@ -37,7 +37,7 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
+let myMoves = 0;
 // This sets up the event listeners
 const newDeck = document.getElementsByClassName("card");
 for (let i=0; i < newDeck.length; i++){
@@ -67,9 +67,9 @@ function clicks(event){
 
 // this calls the function to show the cards
   openList();
-  // if (myClicks ===2){
-  //   checkForMatch();
-  // };
+  myCounter();
+
+
 };
 
 function openList(){
@@ -121,5 +121,15 @@ function checkForMatch(){
     alert ("The cards do not match.");
     noMatch();
     myClicks=0;
+  };
+};
+
+function myCounter(){
+  if (myClicks===2){
+    let myMove = document.querySelector(".moves");
+    myMoves ++;
+    myMove.textContent = myMoves;
+    console.log (myMoves);
+
   };
 };
