@@ -54,7 +54,7 @@ let myClicks = 0;
 let myCard = "";
 let class1="";
 let class2="";
-
+let matches ="";
 /*This is the main function and really drives what happens when a card is clicked
 it branches out to other functions to achieve the overall effect of picking cards
 and matching.
@@ -101,7 +101,10 @@ function match(){
 
   class1.add("match");
   class2.add("match");
-
+  matches ++;
+  if (matches===8){
+    scoreCard();
+  };
 };
 
 function noMatch(){
@@ -132,4 +135,24 @@ function myCounter(){
     console.log (myMoves);
 
   };
+};
+
+function scoreCard(){
+
+  const newLi = document.getElementsByTagName("Li");
+  let numberStars =0;
+  if (myMoves <11){
+    numberStars = 3;
+  } else if (myMoves>10 && myMoves <16) {
+    numberStars = 2;
+  }else{
+    numberStars=1;
+  };
+
+  for (let i=0; i < numberStars; i++){
+    // This calls the clicks function that does some work
+    newLi[i].innerHTML= '<i class="fa fa-star"></i>';
+
+  };
+alert ("Gongratulations!!!! You won!");
 };
