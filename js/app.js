@@ -17,7 +17,7 @@ const cards =['<i class="fa fa-diamond"></i>',
             '<i class="fa fa-bicycle"></i>',
             '<i class="fa fa-bomb"></i>',
             '<i class="fa fa-bomb"></i>'];
-console.log (cards);
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -35,21 +35,16 @@ Array.prototype.shuffle = function() {
   return this;
 };
 cards.shuffle();
-console.log(cards);
+
 
 const newCard = document.getElementsByClassName("card");
 
 for (let i=0; i < newCard.length; i++){
-  // This calls the clicks function that does some work
+
   for(let i = 0; i < cards.length; i++){
-
-
   newCard[i].innerHTML= cards[i];
   };
 };
-
-
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -64,11 +59,21 @@ for (let i=0; i < newCard.length; i++){
 let myMoves = 0;
 // This sets up the event listeners
 const newDeck = document.getElementsByClassName("card");
+
 for (let i=0; i < newDeck.length; i++){
   // This calls the clicks function that does some work
   newDeck[i].addEventListener ("click", clicks);
-
 };
+
+// restarts the Game
+const myRestart = document.querySelector('.fa-repeat');
+myRestart.addEventListener("click", reStart);
+
+function reStart(){
+  location.reload();
+};
+
+
 
 // these 3 let statements are used to keep track of how many cards are clicked
 let firstCard = "";
@@ -106,7 +111,6 @@ function openList(){
     class1.add("open", "show");
     firstCard =myCard.innerHTML;
 
-    console.log (firstCard);
   };
 
   if (myClicks ===2) {
@@ -114,7 +118,7 @@ function openList(){
     class2=myCard.classList;
     class2.add("open", "show");
     secondCard = myCard.innerHTML;
-    console.log(secondCard);
+
  setTimeout(checkForMatch,250) ;
   };
 
@@ -156,7 +160,7 @@ function myCounter(){
     let myMove = document.querySelector(".moves");
     myMoves ++;
     myMove.textContent = myMoves;
-    console.log (myMoves);
+
 
   };
 };
@@ -167,10 +171,13 @@ function scoreCard(){
   let numberStars =0;
   if (myMoves <11){
     numberStars = 3;
+    alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 3 Stars.");
   } else if (myMoves>10 && myMoves <16) {
     numberStars = 2;
+    alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 2 Stars.");
   }else{
     numberStars=1;
+    alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned a Star.");
   };
 
   for (let i=0; i < numberStars; i++){
@@ -178,5 +185,5 @@ function scoreCard(){
     newLi[i].innerHTML= '<i class="fa fa-star"></i>';
 
   };
-alert ("Gongratulations!!!! You won!");
+// alert ("Gongratulations!!!! You won!");
 };
