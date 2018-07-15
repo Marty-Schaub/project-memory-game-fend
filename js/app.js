@@ -1,23 +1,17 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards =['<i class="fa fa-diamond"></i>',
-            '<i class="fa fa-diamond"></i>',
-            '<i class="fa fa-paper-plane-o"></i>',
-            '<i class="fa fa-paper-plane-o"></i>',
-            '<i class="fa fa-anchor"></i>',
-            '<i class="fa fa-anchor"></i>',
-            '<i class="fa fa-bolt"></i>',
-            '<i class="fa fa-bolt"></i>',
-            '<i class="fa fa-cube"></i>',
-            '<i class="fa fa-cube"></i>',
-            '<i class="fa fa-leaf"></i>',
-            '<i class="fa fa-leaf"></i>',
-            '<i class="fa fa-bicycle"></i>',
-            '<i class="fa fa-bicycle"></i>',
-            '<i class="fa fa-bomb"></i>',
-            '<i class="fa fa-bomb"></i>'];
+const rawCards =['<i class="fa fa-diamond"></i>',
+                '<i class="fa fa-paper-plane-o"></i>',
+                '<i class="fa fa-anchor"></i>',
+                '<i class="fa fa-bolt"></i>',
+                '<i class="fa fa-cube"></i>',
+                '<i class="fa fa-leaf"></i>',
+                '<i class="fa fa-bicycle"></i>',
+                '<i class="fa fa-bomb"></i>'];
 
+/*Thank you to the Udacity Reviewer that suggested to use the concat to clean up the code*/
+const cards = rawCards.concat(rawCards);
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
