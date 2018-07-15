@@ -104,6 +104,10 @@ h1 {
 
 }
 
+.hide{
+  visibility: hidden;
+}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;

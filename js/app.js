@@ -12,6 +12,10 @@
  let matches ="";
  let myMoves = 0;
  let numberStars =0;
+ const firstStar = document.querySelector(".star1");
+ const secondStar = document.querySelector(".star2");
+ const oneStar = firstStar.classList;
+ const twoStar = secondStar.classList;
 
 const rawCards =['<i class="fa fa-diamond"></i>',
                 '<i class="fa fa-paper-plane-o"></i>',
@@ -110,6 +114,7 @@ if(myCard.classList.contains ("open")){
     class1=myCard.classList;
     class1.add("open", "show");
     firstCard =myCard.innerHTML;
+    console.log (myCard);
 
   };
 
@@ -121,6 +126,7 @@ if(myCard.classList.contains ("open")){
     setTimeout(checkForMatch,1000) ;
   };
      myCounter();
+     scoreCard();
 }
 };
 
@@ -130,9 +136,7 @@ function match(){
   class1.add("match");
   class2.add("match");
   matches ++;
-  if (matches===8){
-    scoreCard();
-  };
+
 };
 
 function noMatch(){
@@ -155,6 +159,7 @@ function checkForMatch(){
 };
 
 function myCounter(){
+
   if (myClicks===2){
     let myMove = document.querySelector(".moves");
     myMoves ++;
@@ -166,22 +171,34 @@ function myCounter(){
 
 function scoreCard(){
 
-  const newLi = document.getElementsByTagName("Li");
-  if (myMoves <11){
-    numberStars = 3;
-    alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 3 Stars.");
-  } else if (myMoves>10 && myMoves <16) {
-    numberStars = 2;
-    alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 2 Stars.");
-  }else{
-    numberStars=1;
-    alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned a Star.");
+  if (myMoves>7 && matches<4){
+
+    oneStar.add("hide");
+  } else if (myMoves>10 && matches<5){
+    twoStar.add("hide");
   };
 
-  for (let i=0; i < numberStars; i++){
-    // This calls the clicks function that does some work
-    newLi[i].innerHTML= '<i class="fa fa-star"></i>';
-
-  };
+  // const newLi = document.getElementsByTagName("Li");
+//   const stars = document.querySelector('.stars');
+//
+//   console.log (stars);
+//   if (myMoves >20){
+//         // stars.innerHTML= '';
+// numberStars = 1;
+//     // alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 3 Stars.");
+//   } else if (myMoves===4) {
+//         // stars.innerHTML= '';
+//  numberStars = 1;
+//     // alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 2 Stars.");
+//   // }else{
+//   //   numberStars=1;
+//     // alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned a Star.");
+//   };
+//
+//   for (let i=0; i < numberStars; i++){
+//     // This calls the clicks function that does some work
+//   stars[i].innerHTML= '';
+//
+//   };
 
 };
