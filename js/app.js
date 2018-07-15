@@ -1,8 +1,23 @@
 /*
  * Create a list that holds all of your cards
  */
-
-
+const cards =['<i class="fa fa-diamond"></i>',
+            '<i class="fa fa-diamond"></i>',
+            '<i class="fa fa-paper-plane-o"></i>',
+            '<i class="fa fa-paper-plane-o"></i>',
+            '<i class="fa fa-anchor"></i>',
+            '<i class="fa fa-anchor"></i>',
+            '<i class="fa fa-bolt"></i>',
+            '<i class="fa fa-bolt"></i>',
+            '<i class="fa fa-cube"></i>',
+            '<i class="fa fa-cube"></i>',
+            '<i class="fa fa-leaf"></i>',
+            '<i class="fa fa-leaf"></i>',
+            '<i class="fa fa-bicycle"></i>',
+            '<i class="fa fa-bicycle"></i>',
+            '<i class="fa fa-bomb"></i>',
+            '<i class="fa fa-bomb"></i>'];
+console.log (cards);
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -10,20 +25,29 @@
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+// shuffle function from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/34377908#34377908
+Array.prototype.shuffle = function() {
+  let m = this.length, i;
+  while (m) {
+    i = (Math.random() * m--) >>> 0;
+    [this[m], this[i]] = [this[i], this[m]]
+  }
+  return this;
+};
+cards.shuffle();
+console.log(cards);
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+const newCard = document.getElementsByClassName("card");
 
-    return array;
-}
+for (let i=0; i < newCard.length; i++){
+  // This calls the clicks function that does some work
+  for(let i = 0; i < cards.length; i++){
+
+
+  newCard[i].innerHTML= cards[i];
+  };
+};
+
 
 
 
