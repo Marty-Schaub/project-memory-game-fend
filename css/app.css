@@ -103,6 +103,10 @@ h1 {
     display: inline-block;
 
 }
+.myCounter {
+    padding-left: 50px;
+    color: blue;
+}
 
 .hide{
   visibility: hidden;

@@ -12,12 +12,18 @@
  let matches ="";
  let myMoves = 0;
  let numberStars =0;
+ let startTime="";
+ let totalClicks = 0;
+ let myTime="";
+ let myTimer="";
+ let runningTime="";
+
  const firstStar = document.querySelector(".star1");
  const secondStar = document.querySelector(".star2");
  const oneStar = firstStar.classList;
  const twoStar = secondStar.classList;
 
-const rawCards =['<i class="fa fa-diamond"></i>',
+ const rawCards =['<i class="fa fa-diamond"></i>',
                 '<i class="fa fa-paper-plane-o"></i>',
                 '<i class="fa fa-anchor"></i>',
                 '<i class="fa fa-bolt"></i>',
@@ -89,23 +95,23 @@ and matching.
 */
 
 function clicks(event){
-
+  if (totalClicks===0){
+    startTime = performance.now();
+  };
   myCard = this;
   myClicks ++;
 
 // this calls the function to show the cards
   openList();
-  // myCounter();
-
-
+  totalClicks ++;
+  //this keeps the timer running
+  timer();
+  stopTimer();
 };
 
 function openList(){OPEN:{
-// need to add functionality to check and make sure the cards clicked are not the
-// exact same card meaning they literally clicked on same card
+// the first if statement checks to see if a card is already open
 if(myCard.classList.contains ("open")){
-  // put code here to stop the execution
-  alert ("please pick another card");
   myClicks --;
   break OPEN;
 };
@@ -114,8 +120,6 @@ if(myCard.classList.contains ("open")){
     class1=myCard.classList;
     class1.add("open", "show");
     firstCard =myCard.innerHTML;
-    console.log (myCard);
-
   };
 
   if (myClicks ===2) {
@@ -127,6 +131,7 @@ if(myCard.classList.contains ("open")){
   };
      myCounter();
      scoreCard();
+     stopTimer();
 }
 };
 
@@ -136,7 +141,12 @@ function match(){
   class1.add("match");
   class2.add("match");
   matches ++;
-
+  if (matches===8){
+    const endTime = performance.now();
+    const finishTime= Math.round(((endTime-startTime)/1000));
+    console.log (finishTime + " seconds");
+    stopTimer();
+  };
 };
 
 function noMatch(){
@@ -164,41 +174,36 @@ function myCounter(){
     let myMove = document.querySelector(".moves");
     myMoves ++;
     myMove.textContent = myMoves;
-
-
   };
 };
 
 function scoreCard(){
 
   if (myMoves>7 && matches<4){
-
     oneStar.add("hide");
-  } else if (myMoves>10 && matches<5){
+  } else if (myMoves>17){
     twoStar.add("hide");
   };
+};
 
-  // const newLi = document.getElementsByTagName("Li");
-//   const stars = document.querySelector('.stars');
-//
-//   console.log (stars);
-//   if (myMoves >20){
-//         // stars.innerHTML= '';
-// numberStars = 1;
-//     // alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 3 Stars.");
-//   } else if (myMoves===4) {
-//         // stars.innerHTML= '';
-//  numberStars = 1;
-//     // alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned 2 Stars.");
-//   // }else{
-//   //   numberStars=1;
-//     // alert ("Gongratulations!!!! You won in " + myMoves + " moves. You earned a Star.");
-//   };
-//
-//   for (let i=0; i < numberStars; i++){
-//     // This calls the clicks function that does some work
-//   stars[i].innerHTML= '';
-//
-//   };
+function timer() {
+  if (totalClicks===1){
+  myTime = setInterval(newTimer,1000);
+  };
+};
 
+function newTimer(){
+  runningTime = Math.round(((performance.now()- startTime)/1000));
+  myTimer = document.querySelector(".timer");
+  myTimer.textContent = "        " +runningTime;
+};
+
+
+
+function stopTimer(){
+
+  if (matches===8){
+    clearInterval(myTime);
+    myTimer.textContent = "        " +runningTime;  
+  };
 };
