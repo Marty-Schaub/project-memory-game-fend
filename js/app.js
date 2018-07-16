@@ -13,11 +13,13 @@
  let myMoves = 0;
  let numberStars =0;
  let startTime="";
+ let finishTime="";
  let totalClicks = 0;
  let myTime="";
  let myTimer="";
  let runningTime="";
-
+ let modal = "";
+ let totalStars = "";
  const firstStar = document.querySelector(".star1");
  const secondStar = document.querySelector(".star2");
  const oneStar = firstStar.classList;
@@ -52,7 +54,6 @@ Array.prototype.shuffle = function() {
 };
 cards.shuffle();
 
-
 const newCard = document.getElementsByClassName("card");
 
 for (let i=0; i < newCard.length; i++){
@@ -77,7 +78,7 @@ for (let i=0; i < newCard.length; i++){
 const newDeck = document.getElementsByClassName("card");
 
 for (let i=0; i < newDeck.length; i++){
-  // This calls the clicks function that does some work
+
   newDeck[i].addEventListener ("click", clicks);
 };
 
@@ -103,18 +104,23 @@ function clicks(event){
 
 // this calls the function to show the cards
   openList();
+// this increases the total Clicks
   totalClicks ++;
   //this keeps the timer running
   timer();
+  // this stops the timer function
   stopTimer();
 };
 
+// This adds the cards to the open list. The OPEN: label is to control flow.
 function openList(){OPEN:{
-// the first if statement checks to see if a card is already open
+// the first if statement checks to see if a card is already open. If it is
+// then the break jumps out of the routine
 if(myCard.classList.contains ("open")){
   myClicks --;
   break OPEN;
 };
+// Assigns innerHTML to variables and shows the cards
   if (myClicks ===1) {
 
     class1=myCard.classList;
@@ -127,6 +133,7 @@ if(myCard.classList.contains ("open")){
     class2=myCard.classList;
     class2.add("open", "show");
     secondCard = myCard.innerHTML;
+    // setTimeout is used to give the user a second to view the 2 cards open
     setTimeout(checkForMatch,1000) ;
   };
      myCounter();
@@ -135,7 +142,7 @@ if(myCard.classList.contains ("open")){
 }
 };
 
-
+// add the match class. If finished calculate time
 function match(){
 
   class1.add("match");
@@ -143,19 +150,20 @@ function match(){
   matches ++;
   if (matches===8){
     const endTime = performance.now();
-    const finishTime= Math.round(((endTime-startTime)/1000));
+    finishTime= Math.round(((endTime-startTime)/1000));
     console.log (finishTime + " seconds");
     stopTimer();
   };
 };
 
+// closes cards if no match
 function noMatch(){
 
   class1.remove("open","show");
   class2.remove("open","show");
 };
 
-
+// this compares the cards clicked
 function checkForMatch(){
   if (firstCard === secondCard) {
     match();
@@ -168,6 +176,7 @@ function checkForMatch(){
   };
 };
 
+// this counts the moves and writes to web page
 function myCounter(){
 
   if (myClicks===2){
@@ -177,33 +186,56 @@ function myCounter(){
   };
 };
 
+// this keeps track of the rating stars
 function scoreCard(){
 
   if (myMoves>7 && matches<4){
     oneStar.add("hide");
+
   } else if (myMoves>17){
     twoStar.add("hide");
-  };
-};
 
+  };
+  // this portion counts the stars not hidden at the end
+  const hideStars = document.getElementsByClassName('hide');
+  totalStars = 3 - hideStars.length;
+  console.log (totalStars);
+};
+// this is the timer
 function timer() {
   if (totalClicks===1){
+//set interval keeps it updating every second
   myTime = setInterval(newTimer,1000);
   };
 };
 
+// this round the timer and puts on the web page
 function newTimer(){
   runningTime = Math.round(((performance.now()- startTime)/1000));
   myTimer = document.querySelector(".timer");
   myTimer.textContent = "        " +runningTime;
 };
 
-
-
 function stopTimer(){
 
   if (matches===8){
     clearInterval(myTime);
-    myTimer.textContent = "        " +runningTime;  
+    myTimer.textContent = "        " + finishTime;
+    myBox();
   };
+};
+//  the code below sets up the modal and hides as necessary
+function myBox(){
+  modal = document.getElementById('myModal')
+  const myNewText =document.querySelector(".modal-text");
+  myNewText.textContent = "You completed the game in " + finishTime + " seconds and earned "+ totalStars + " \
+  stars. If you would like to play another game, click the refresh button after closing this window. \
+  To close This window, click inside of it."
+  modal.style.display="block";
+}
+
+window.onclick = function(event){
+  if (event.target != modal){
+  modal.style.display = "none";
+};
 };
